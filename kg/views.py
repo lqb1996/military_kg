@@ -28,7 +28,7 @@ newProgress = True
 # This skips csrf validation. Use csrf_protect to have validation
 def index(request):
 
-    ets = []
+    ets = {}
     # if triples_editable=='True':
     #     ets.append('triples')
     # if entities_editable=='True':
@@ -37,8 +37,23 @@ def index(request):
     #     ets.append('ment2ent')
     # if types_editable=='True':
     #     ets.append('types')
+    # ets.append('triples')
+    name = '歼-16'
+    pro = '名称'
+    selection = ['歼-16战机', '歼16战机']
+    content = "{'名称': '歼-16战机', '首飞时间': '2011年10月17日', '研发单位': '中国沈阳飞机公司', '气动布局': '后掠翼'," \
+              " '发动机数量': '双发', '飞行速度': '超音速', '关注度': '(5分) 武器装备 （1）机炮：30\xa0mm机炮\xa0150发；" \
+              " （2）导弹：鹰击-62反舰巡航导弹，鹰击-83反舰导弹，鹰击-91反舰导弹，鹰击-9多用途导弹，雷电-10反辐射导弹，" \
+              "霹雳-8空空导弹，霹雳-11空空导弹，霹雳-12中程空空导弹； （3）炸弹：雷霆2-雷射导引弹，雷石6-滑翔炸弹，200A" \
+              "反机场炸弹，通用炸弹500千克，1500千克。 技术数据', '乘员': '2人', '机长': '21.19米', '翼展': '14.7米'," \
+              " '机高': '5.9米', '发动机': 'AL-31F涡扇发动机', '最大飞行速度': '1,438千米每小时', '最大航程': '4,288千米'}"
 
-    return render(request, "kg/index.html",{"ets":ets})
+    ets['name'] = name
+    ets['pro'] = pro
+    ets['selection'] = selection
+    ets['content'] = content
+
+    return render(request, "kg/index.html", {"ets": ets})
 
 
 def temp(request):
@@ -126,7 +141,7 @@ def login(request):
     cnt = 0
     if user == 'admin' and pwd == 'admin':
         cnt = 1
-    print(156,cnt)
+    print(156, cnt)
     if cnt != 0:
         print(request.COOKIES)
         obj = redirect("/kg/index")
