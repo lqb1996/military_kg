@@ -1,0 +1,142 @@
+幸福照相馆？？？
+甜蜜蜜
+
+cndb的运维系统 我在本地测不出问题 交给徐波学长测试连不上cndb 
+
+mongodb://daporter:gd@ata@57.300.42.113:32017/cndbpedia
+
+
+
+
+218.193.131.243:3399
+gdmjump gdmlab@188@fudan@jump
+django 1.11.7
+
+
+
+属性对齐
+拆分并列名词
+日期统一格式
+去重
+保存html页面
+爬取情况汇总成excel表(是否爬取成功、爬取失败的原因)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+用民事诉讼法 查询 
+添加复旦大学 entity
+
+
+add ment2ent 最后一条数据 entity自动添加（添加、修改）
+
+民事诉讼法（郭翔著）修改为 郭翔
+
+演示取消
+
+看完数据库 ment ent
+
+删除 ment2ent 郭翔
+
+
+
+
+href方式  唐代人 修改为唐代
+唐
+
+
+
+
+
+链接部分 
+entities
+ment2ent:ent
+triples:s,OE
+
+
+python manage.py create_admin_account --username a --password a
+
+豆瓣源：pip install --index-url https://pypi.douban.com/simple pymongo==2.8
+ mongoengine-0.15.0
+pip install mongoengine==0.9.0
+
+Uninstalling pymongo-3.6.1 3.7.3
+pymongo==2.8
+
+
+db.createUser(
+                        {
+                            user: "lina",
+                            pwd: "111111",
+                            roles:
+                            [
+                              {
+                                role: "readWrite",
+                                db: "sample"
+                              }
+                            ]
+                          }
+                        );
+
+
+
+mongod --port 32017 --dbpath  dbpath='D:\\Program\\mongoDB\\server3.6\\data\\db'  --auth
+
+mongod --port 32017 --dbpath  dbpath='D:\Program\mongoDB\server3.6\data\db'  --auth
+
+mongod --dbpath D:/Program/mongoDB/server3.6/data/db  --port 27137  --config D:/Program/mongoDB/server3.6/mongo.config  --logpath D:/Program/mongoDB/server3.6/data/log/mongo.log --logappend 
+
+mongod --port 32017 --dbpath  dbpath='D:\Program\mongoDB\server3.6\data\db' --config D:\Program\mongoDB\server3.6\mongo.config 
+
+mongod --dbpath D:/Program/mongoDB/server3.6/data/db  --port 27137
+
+
+
+破解版
+
+db.ment2ent.find({"m":"弟子规"})
+
+
+
+db.ment2ent.find()
+
+
+
+
+
+ 
+国家地区 产地 制作国家／地区
+
+
+Null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

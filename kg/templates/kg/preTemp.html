@@ -1,0 +1,298 @@
+
+ html模板
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/library/iconfont_gasOrder.css">
+    <link rel="stylesheet" type="text/css" href="../../static/library/shadow.css">
+
+</head>
+<body>
+
+
+
+<button type="button" class="btn btn-warning" title="Popover title"
+			data-container="body" data-toggle="popover" data-placement="right"
+			data-content="右侧的 Popover 中的一些内容">
+		右侧的 Popover
+	</button>
+
+
+
+
+{##}
+{#<ul class="choice">#}
+{#    <li><input type="radio" name="choice" id="judge-1-T"/>#}
+{#        <label for="judge-1-T" class="check-box"></label> 正确#}
+{#    </li>#}
+{#    <li>#}
+{#        <input type="radio" name="choice" id="judge-1-F"/>#}
+{#        <label for="judge-1-F" class="check-box"></label> 错误#}
+{#    </li>#}
+{#</ul>#}
+{#<h3 style="margin-bottom: 40px">CNDB增删改查</h3>#}
+{##}
+{##}
+{#<div class="container col-md-8 col-md-offset-2 parent">#}
+    {#检索框#}
+{##}
+{#    <div class="container">#}
+{#        <div class="row col-md-7 ">#}
+{#            <div class="radio-inline">#}
+{#                <label for="id_search_by_1"><input checked="checked" id="id_search_by_1" name="choice" type="radio"#}
+{#                                                   value="ment2ent" required=""> ment2ent</label>#}
+{#            </div>#}
+{##}
+{#            <div class="radio-inline">#}
+{#                <label for="id_search_by_2"><input id="id_search_by_2" name="search_by" type="radio" value="entity"#}
+{#                                                   required=""> entity</label>#}
+{#            </div>#}
+{##}
+{#            <div class="input-group" style="margin: 20px auto  20px auto">#}
+{#                <input type="text" id='query-content' class="form-control input-lg" maxlength="32" name="subject"#}
+{#                       placeholder=""/>#}
+{#                <span class="input-group-btn">#}
+{#           <input type="submit" class="btn btn-default btn-lg btn-info" value="查询" id="query-triple"#}
+{#                  onclick="query()">#}
+{#       </span>#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{##}
+{#    </div>#}
+{##}
+    {#    检索内容#}
+{##}
+    {#    table#}
+    <div class="panel panel-default parent-panel">
+        <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#collapseInformation">
+                       ready
+            <div class="panel panel-default panel-ready">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                     data-target="#collapseInformation-ready">
+                    <h4 class="panel-title ready-title">
+                        Information
+                    </h4>
+                </div>
+                <div id="collapseInformation-ready" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table class="panel-table table table-hover ">
+                            <thead>
+                            <tr>
+
+                                <th>mention</th>
+                                <th>entity</th>
+                                <th>操作</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+
+                            <tr>
+                                <td>kg.subject</td>
+                                <td data-container="body" data-toggle="popover" data-placement="bottom"
+			data-content="底部的 Popover 中的一些内容"> kg.predicate</td>
+                                <td><a href="#" class="modify" onclick="showModify('_{{ kg.id }}')"
+                                       id='_{{ kg.id }}'>修改 </a></td>
+                                <td><a href="#" tid='{{ kg.id }}' subject='{{ kg.subject }}'
+                                       onclick="del(this.getAttribute('tid'),this.getAttribute('subject'))">删除</a></td>
+                            </tr>
+
+                              <tr>
+                                <td>kg.subject</td>
+                                <td data-container="body" data-toggle="popover" data-placement="bottom"
+			data-content="底部的 Popover 中的一些内容"> kg.predicate</td>
+                                <td><a href="#" class="modify" onclick="showModify('_{{ kg.id }}')"
+                                       id='_{{ kg.id }}'>修改 </a></td>
+                                <td><a href="#" tid='{{ kg.id }}' subject='{{ kg.subject }}'
+                                       onclick="del(this.getAttribute('tid'),this.getAttribute('subject'))">删除</a></td>
+                            </tr>
+
+
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+{#            entity#}
+            <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                     data-target="#collapseInformation-entity">
+                    <h4 class="panel-title">
+                        Entity Table
+                                                Information
+                    </h4>
+                </div>
+                <div id="collapseInformation-entity" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="entity">
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+{#            ment2ent#}
+            <div class="panel panel-default panel-ment2ent">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                     data-target="#collapseInformation-ment2ent">
+                    <h4 class="panel-title">
+                                                Information
+                        Ment2ent Table
+                    </h4>
+                </div>
+                <div id="collapseInformation-ment2ent" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="ment2ent">
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+{#            triple#}
+            <div class="panel panel-default panel-triple">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                     data-target="#collapseInformation-triple">
+                    <h4 class="panel-title">
+                                                Information
+                        Triple Table
+                    </h4>
+                </div>
+                <div id="collapseInformation-triple" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="triple">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion"
+                                     data-target="#collapseInformation-abstract">
+                                    <h4 class="panel-title">
+                                        <div class="subject"><a>弟子规（黄甫林著书籍）</a></div>
+                                        <br>
+                                        <div class="predicate">DESC</div>
+                                    </h4>
+                                </div>
+                                <div id="collapseInformation-abstract" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="desc-info">
+                                                                                                    <textarea style="margin: 0px; height: 293px; width: 539px;">
+                                            1981年出演电影处女作《彩云曲》 [1] 。1983年主演的武侠剧《神雕侠侣》在香港获得62点的收视纪录 [2-3]
+                                            。1991年创办天幕电影公司 [4] 。1992年，凭借传记片《五亿探长雷洛传》获得第11届香港电影金像奖最佳男主角提名 [5]
+                                            。1994年担任剧情片《天与地》的制片人 [6] 。2000年凭借警匪片《暗战》获得第19届香港电影金像奖最佳男主角奖 [7]
+                                            。2004年凭借警匪片《无间道3：终极无间》获得第41届台湾金马奖最佳男主角奖 [8]
+                                            。2005年获得香港UA院线颁发的全港最高累积票房香港男演员”奖 [9] 。2006年获得釜山国际电影节亚洲最有贡献电影人奖
+                                            [10]
+                                            。2011年主演剧情片《桃姐》，并凭借该片先后获得台湾金马奖最佳男主角奖、香港电影金像奖最佳男主角奖 [11]
+                                            ；同年担任第49届台湾电影金马奖评审团主席 [12] 。2017年主演警匪动作片《拆弹专家》 [13] 。
+                                                                                               </textarea>
+
+                                            <div class="operation">
+                                                <a href="#" style="margin-right:10px" class="modify_triple"
+                                                   onclick="showModify(this.id)"
+                                                   id="_triple5b658c535dc5fa3570f81722">修改 </a>
+                                                <a href="#" class="modify_triple" onclick="showModify(this.id)"
+                                                   id="_triple5b658c535dc5fa3570f81722">删除 </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="panel-table table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Predicate</th>
+                                <th>OM</th>
+                                <th>OE</th>
+                                <th>操作</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><a href="#" onclick="query_entity('弟子规（黄甫林著书籍）')">弟子规（黄甫林著书籍）</a></td>
+                                <td>CATEGORY_ZH</td>
+                                <td><input type="hidden" value="文化">文化</td>
+                                <td></td>
+                                <td><a href="#" class="modify_triple" onclick="showModify(this.id)"
+                                       id="_triple59684c5cebf4f41a00b2e474">修改 </a></td>
+                                <td><a href="#" tid="triple59684c5cebf4f41a00b2e474" subject="弟子规（黄甫林著书籍）"
+                                       onclick="del(this.getAttribute('tid'),this.getAttribute('subject'))">删除</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" onclick="query_entity('弟子规（黄甫林著书籍）')">弟子规（黄甫林著书籍）</a></td>
+                                <td>DESC</td>
+                                <td><input type="hidden" value=""></td>
+                                <td></td>
+                                <td><a href="#" class="modify_triple" onclick="showModify(this.id)"
+                                       id="_triple59684c5cebf4f41a00b2e475">修改 </a></td>
+                                <td><a href="#" tid="triple59684c5cebf4f41a00b2e475" subject="弟子规（黄甫林著书籍）"
+                                       onclick="del(this.getAttribute('tid'),this.getAttribute('subject'))">删除</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" onclick="query_entity('弟子规（黄甫林著书籍）')">弟子规（黄甫林著书籍）</a></td>
+                                <td>别名1</td>
+                                <td>弟子规</td>
+                                <td><input type="hidden" value="<a href='弟子规（黄甫林著书籍）552'>弟子规</a>"><a href="#"
+                                                                                                     onclick="query_entity('弟子规（黄甫林著书籍）552')">弟子规（黄甫林著书籍）552</a>
+                                </td>
+                                <td><a href="#" class="modify_triple" onclick="showModify(this.id)"
+                                       id="_triple5b658c535dc5fa3570f81722">修改 </a></td>
+                                <td><a href="#" tid="triple5b658c535dc5fa3570f81722" subject="弟子规（黄甫林著书籍）"
+                                       onclick="del(this.getAttribute('tid'),this.getAttribute('subject'))">删除</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="hidden" class="query-add-triple" name="subject"></td>
+                                <td><input type="hidden" class="query-add-triple" name="predicate"
+                                           placeholder="predicate"></td>
+                                <td><input type="hidden" class="query-add-triple" name="om" placeholder="om"></td>
+                                <td><input type="hidden" class="query-add-triple" name="oe" placeholder="oe"></td>
+                                <td></td>
+                                <td><a href="#" class="add-triple" onclick="add()"> 添加</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+{##}
+{#</div>#}
+{#</div>#}
+
+
+<script src="../../static/library/jquery.min.js"></script>
+
+<script src="../../static/library/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+$(function () {
+	$("[data-toggle='popover']").popover();
+});
+</script>
+</body>
+</html>
