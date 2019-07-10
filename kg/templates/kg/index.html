@@ -174,20 +174,53 @@
 
 <!--            </div>-->
 
-            <div role="tabpanel" class="tab-pane active" id="baike">
+             <div role="tabpanel" class="tab-pane active" id="half-structure">
                 <!-- 半结构化数据---------------------------------------------------------------------------->
                 <div class="container">
-
-
                 </div>
+                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="baike">
+                <!-- 百科数据---------------------------------------------------------------------------->
+                <div class="container">
+                </div>
+                <!-- 检索内容---------------------------------------------------------------------->
+                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="non-structure">
+                <!-- 非结构化数据---------------------------------------------------------------------------->
+                <div class="container">
+                </div>
+                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="mix">
 
                 <!-- 检索内容---------------------------------------------------------------------->
 
-                <div id='' class="shadow panel panel-default parent-panel" style="padding:15px">
-
+                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                <!-- 知识融合数据---------------------------------------------------------------------------->
+                <div class="container">
+                    名称为<label>{{ets.name}}</label>实体属性冲突，需进行融合,融合属性为<label>{{ets.pro}}</label>
+                    请选择：<br>
+                    <form action="" method="get" accept-charset="UTF-8">
+                    {%for s in ets.selection%}
+                    <lable><input type="radio" name="selections" value={{forloop.counter}}>{{forloop.counter}}、{{s}}</lable><br>
+                    {% endfor %}
+                       <input type="submit" value="提交">
+                </div>
 
                 </div>
 
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="vector">
+                <!-- 表示学习数据---------------------------------------------------------------------------->
+                <div class="container">
+                </div>
+                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                </div>
             </div>
 
 <!--            <div role="tabpanel" class="tab-pane active" id="non-structure">-->
