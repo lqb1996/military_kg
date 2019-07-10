@@ -121,7 +121,7 @@ AN/SQQ-89水下作战系统，增强舰艇执行多种任务的能力，可为�
     ets['name'] = name
     ets['pro'] = pro
     ets['selection'] = selection
-    ets['content'] = non_structure_content
+    ets['non_structure_content'] = non_structure_content
 
 
     return render(request, "kg/index.html", {"ets": ets})
