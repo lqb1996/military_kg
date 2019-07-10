@@ -179,25 +179,35 @@
                 <div class="container">
                 </div>
                 <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                    半结构化知识抽取
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane active" id="baike">
+            <div role="tabpanel" class="tab-pane" id="baike">
                 <!-- 百科数据---------------------------------------------------------------------------->
                 <div class="container">
                 </div>
                 <!-- 检索内容---------------------------------------------------------------------->
                 <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                    百科知识抽取
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane active" id="non-structure">
+            <div role="tabpanel" class="tab-pane" id="non-structure">
                 <!-- 非结构化数据---------------------------------------------------------------------------->
                 <div class="container">
                 </div>
                 <div class="shadow panel panel-default parent-panel" style="padding:15px">
-                    <label>{{ets.non_structure_content}}</label>
+                    {%for c in ets.non_structure_content%}
+                        {%  if c in "{" %}
+                        <label>
+                        {%  elif c in "}" %}
+                        </label>
+                        {%  else %}
+                        {{c}}
+                        {%  endif %}
+                    {%endfor%}
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane active" id="mix">
+            <div role="tabpanel" class="tab-pane" id="mix">
 
                 <!-- 检索内容---------------------------------------------------------------------->
 
@@ -210,17 +220,19 @@
                     {%for s in ets.selection%}
                     <lable><input type="radio" name="selections" value={{forloop.counter}}>{{forloop.counter}}、{{s}}</lable><br>
                     {% endfor %}
-                       <input type="submit" value="提交">
+                        <input type="submit" value="提交">
+                    </form>
                 </div>
 
                 </div>
 
             </div>
-            <div role="tabpanel" class="tab-pane active" id="vector">
+            <div role="tabpanel" class="tab-pane" id="vector">
                 <!-- 表示学习数据---------------------------------------------------------------------------->
                 <div class="container">
                 </div>
                 <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                知识表示学习
                 </div>
             </div>
 
