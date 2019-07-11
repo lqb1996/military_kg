@@ -14,6 +14,10 @@ urlpatterns = [
     # url(r'^add/action$', views.add_action,name='add_action'),
     url(r'^$', views.login, name='login'),
     url(r'^index/$', views.index),
+    url(r'^half_structure/get/$', views.half_structure),
+    url(r'^half_structure/post/$', views.half_structure_post),
+    url(r'^non_structure/get/$', views.non_structure),
+    # url('non_structure/get/', views.non_structure),
     url(r'^temp/$', views.temp),
     url(r'^login/$', views.login, name='login'),
 

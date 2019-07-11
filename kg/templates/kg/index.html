@@ -97,7 +97,7 @@
             </li>
             <li role=""><a href="#baike" aria-controls="" role="" data-toggle="tab">百科知识抽取</a>
             </li>
-            <li role=""><a href="#non-structure" aria-controls="profile" role="tab" data-toggle="tab">非结构化知识抽取</a>
+            <li role="" onclick="get_non_structure_data();"><a href="#non-structure" aria-controls="profile" role="tab" data-toggle="tab">非结构化知识抽取</a>
             </li>
             <li role=""><a href="#mix" aria-controls="" role="" data-toggle="tab">多源知识融合</a>
             </li>
@@ -195,7 +195,7 @@
                 <!-- 非结构化数据---------------------------------------------------------------------------->
                 <div class="container">
                 </div>
-                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                <div id="non_structure_content" class="shadow panel panel-default parent-panel" style="padding:15px">
                     {%for c in ets.non_structure_content%}
                         {%  if c in "{" %}
                         <label>
@@ -294,6 +294,7 @@
 <script src="../../static/library/js/query_single.js"></script>
 <script src="../../static/library/js/query.js"></script>
 <script src="../../static/library/jquery.min.js"></script>
+<script src="../../static/library/show.js"></script>
 
 <script src="../../static/library/bootstrap/js/bootstrap.min.js"></script>
 <!--<script>-->
