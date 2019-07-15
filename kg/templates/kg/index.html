@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <title>军事知识图谱知识抽取表示展示系统</title>
 
+<script src="../../static/library/js/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
+<script src="../../static/library/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../../static/library/jquery.lineProgressbar.css">
+<script src="../../static/library/js/jquery.lineProgressbar.js" type="text/javascript"></script>
+<!--<script src="../../static/library/js/query_single.js"></script>-->
+<!--<script src="../../static/library/js/query.js"></script>-->
+<!--<script src="../../static/library/jquery.min.js"></script>-->
+<script src="../../static/library/show.js"></script>
     <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
     <!--{#<link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/bootstrap.min.css"/>#}-->
 
     <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>
@@ -95,7 +103,7 @@
         <ul class="nav nav-pills tab-nike" role="">
             <li role="" class="active"><a href="#half-structure" aria-controls="" role="" data-toggle="tab">半结构化知识抽取</a>
             </li>
-            <li role=""><a href="#baike" aria-controls="" role="" data-toggle="tab">百科知识抽取</a>
+            <li role="" onclick="get_baike();"><a href="#baike" aria-controls="" role="" data-toggle="tab">百科知识抽取</a>
             </li>
             <li role="" onclick="get_non_structure_data();"><a href="#non-structure" aria-controls="profile" role="tab" data-toggle="tab">非结构化知识抽取</a>
             </li>
@@ -177,14 +185,21 @@
              <div role="tabpanel" class="tab-pane active" id="half-structure">
                 <!-- 半结构化数据---------------------------------------------------------------------------->
                 <div class="container">
+                    <input type="radio" onclick="half_equipment()" name="half" value=""><label>装备信息抽取</label>
+                    <input type="radio" onclick="half_extract()" name="half" value=""><label>环球军事网半结构化信息</label>
+                    <input type="radio" onclick="half_syn()" name="half" value=""><label>同义词生成</label>
                 </div>
-                <div class="shadow panel panel-default parent-panel" style="padding:15px">
-                    半结构化知识抽取
+
+        <div id="progressbar1"></div>
+                <div id="half_structure_content" class="shadow panel panel-default parent-panel" style="padding:15px">
+                    <h1>半结构化知识抽取</h1>
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="baike">
                 <!-- 百科数据---------------------------------------------------------------------------->
                 <div class="container">
+
+        <div id="progressbar2"></div>
                 </div>
                 <!-- 检索内容---------------------------------------------------------------------->
                 <div class="shadow panel panel-default parent-panel" style="padding:15px">
@@ -194,6 +209,8 @@
             <div role="tabpanel" class="tab-pane" id="non-structure">
                 <!-- 非结构化数据---------------------------------------------------------------------------->
                 <div class="container">
+
+        <div id="progressbar3"></div>
                 </div>
                 <div id="non_structure_content" class="shadow panel panel-default parent-panel" style="padding:15px">
                     {%for c in ets.non_structure_content%}
@@ -212,15 +229,18 @@
                 <!-- 检索内容---------------------------------------------------------------------->
 
                 <div class="shadow panel panel-default parent-panel" style="padding:15px">
+
+        <div id="progressbar4"></div>
+                </div>
                 <!-- 知识融合数据---------------------------------------------------------------------------->
                 <div class="container">
                     名称为<label>{{ets.name}}</label>实体属性冲突，需进行融合,融合属性为<label>{{ets.pro}}</label>
                     请选择：<br>
                     <form action="" method="get" accept-charset="UTF-8">
                     {%for s in ets.selection%}
-                    <lable><input type="radio" name="selections" value={{forloop.counter}}>{{forloop.counter}}、{{s}}</lable><br>
+                    <input type="radio" name="selections" value={{forloop.counter}}><lable>{{forloop.counter}}、{{s}}</lable><br>
                     {% endfor %}
-                        <input type="submit" value="提交">
+                        <input type="button" onclick="upload_mix();" value="提交">
                     </form>
                 </div>
 
@@ -230,9 +250,13 @@
             <div role="tabpanel" class="tab-pane" id="vector">
                 <!-- 表示学习数据---------------------------------------------------------------------------->
                 <div class="container">
+        <div id="progressbar5"></div>
                 </div>
                 <div class="shadow panel panel-default parent-panel" style="padding:15px">
-                知识表示学习
+                    请求URL：<label>https://192.168.12.102:8888/cgi-bin/get_similar_target.py?name=</label>
+                    <input id="vector_name" type="text" value="F-22"><input type="button" value="发送请求" onclick="get_vector()">
+                </div>
+                <div id="show_vector" class="" style="">
                 </div>
             </div>
 
@@ -291,12 +315,7 @@
 </div>
 </div>
 
-<script src="../../static/library/js/query_single.js"></script>
-<script src="../../static/library/js/query.js"></script>
-<script src="../../static/library/jquery.min.js"></script>
-<script src="../../static/library/show.js"></script>
 
-<script src="../../static/library/bootstrap/js/bootstrap.min.js"></script>
 <!--<script>-->
 <!--    document.querySelector('.hide-count-result').onclick = function () {-->
 
