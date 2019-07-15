@@ -1,6 +1,5 @@
 //非结构化知识抽取
 function get_non_structure_data(){
-
     $.ajax({
         type:"GET",
         url:"/kg/non_structure/get/",
@@ -24,6 +23,10 @@ function get_non_structure_data(){
 }
 //知识表示学习
 function get_vector(){
+$('#progressbar5').LineProgressbar({
+        duration: 10,
+		percentage: 90
+	});
 var name = $("#vector_name").val();
 $.ajax({
         type:"GET",
@@ -57,6 +60,10 @@ function upload_mix(){
 function half_equipment(){
 var h1_label = "<h1>装备信息抽取</h1><br/>"
 var w = "200px"
+$('#progressbar1').LineProgressbar({
+        duration: 13000,
+		percentage: 100
+	});
 $.ajax({
         type:"GET",
         url:"/kg/half_structure/equipment",
@@ -74,7 +81,13 @@ $.ajax({
              h = h + "<tr><td width='"+w+"'>" + obj.equ[i].subject_name + "</td><td width='"+w+"'>" + obj.equ[i].relation + "</td><td width='"+w+"'>" + obj.equ[i].object_name + "</td></tr>"
              }
              h += "</table>"
+             var t1 = window.setInterval(function(){
+             var e = $('#progressbar1').find(".percentCount").html();
+             if(e=="100%"){
          $("#half_structure_content").html(h);
+             window.clearInterval(t1);
+             }
+             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);
@@ -84,7 +97,7 @@ $.ajax({
 
 
 function get_baike(){
-$('#progressbar1').LineProgressbar({
+$('#progressbar2').LineProgressbar({
 		percentage: 50
 	});
 }
@@ -93,6 +106,10 @@ $('#progressbar1').LineProgressbar({
 function half_extract(){
 var h1_label = "<h1>环球军事网半结构化信息</h1><br/>"
 var w = "200px"
+$('#progressbar1').LineProgressbar({
+        duration: 8000,
+		percentage: 100
+	});
 $.ajax({
         type:"GET",
         url:"/kg/half_structure/extract",
@@ -106,7 +123,13 @@ $.ajax({
                 obj=eval("("+data+")");
              }
              h1_label += obj.ext
+             var t1 = window.setInterval(function(){
+             var e = $('#progressbar1').find(".percentCount").html();
+             if(e=="100%"){
          $("#half_structure_content").html(h1_label);
+             window.clearInterval(t1);
+             }
+             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);
@@ -117,6 +140,10 @@ $.ajax({
 function half_syn(){
 var h1_label = "<h1>同义词生成</h1><br/>"
 var w = "200px"
+$('#progressbar1').LineProgressbar({
+        duration: 600,
+		percentage: 100
+	});
 $.ajax({
         type:"GET",
         url:"/kg/half_structure/syn",
@@ -142,7 +169,13 @@ $.ajax({
              h += ']<br/>'
              }
 //             h += obj.syn;
+             var t1 = window.setInterval(function(){
+             var e = $('#progressbar1').find(".percentCount").html();
+             if(e=="100%"){
          $("#half_structure_content").html(h);
+             window.clearInterval(t1);
+             }
+             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);

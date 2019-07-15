@@ -115,74 +115,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
-<!--            <div role="tabpanel" class="tab-pane active" id="half-structure">-->
-<!--                <div class="container">-->
-
-<!--                    &lt;!&ndash; 文件导入radio&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
-
-<!--                    <div class="row col-md-7 " style="padding-left:0px;font-size: 14px;">-->
-
-<!--                        <div class="radio-inline">-->
-<!--                            <label>-->
-<!--                                <input id="file-entities" name="file-type" type="radio"-->
-<!--                                       value="entities" required="">-->
-<!--                                entities-->
-<!--                            </label>-->
-<!--                        </div>-->
-
-<!--                        <div class="radio-inline">-->
-<!--                            <label>-->
-<!--                                <input id="file-ment2ent" name="file-type" type="radio"-->
-<!--                                       value="ment2ent" required="">-->
-<!--                                ment2ent-->
-<!--                            </label>-->
-<!--                        </div>-->
-
-<!--                        <div class="radio-inline">-->
-<!--                            <label>-->
-<!--                                <input id="file-types" name="file-type" type="radio"-->
-<!--                                       value="types" required="">-->
-<!--                                types-->
-<!--                            </label>-->
-<!--                        </div>-->
-
-<!--                        <div class="radio-inline">-->
-<!--                            <label>-->
-<!--                                <input id="file-triples" name="file-type" type="radio"-->
-<!--                                       value="triples" required="" checked="checked">-->
-<!--                                triples-->
-<!--                                <span style="font-weight: 700" class="dropdown-toggle triple-needLink"-->
-<!--                                      data-toggle="dropdown" aria-expanded="false">（链接）</span><b class="caret"></b>-->
-<!--                                <ul class="dropdown-menu">-->
-
-<!--                                    <li><a value="（链接）"-->
-<!--                                           onclick="showSelectTriple(this.getAttribute('value'))">（链接）</a>-->
-<!--                                    </li>-->
-<!--                                    <li class="divider"></li>-->
-<!--                                    <li><a value="（不链接）"-->
-<!--                                           onclick="showSelectTriple(this.getAttribute('value'))">（不链接）</a>-->
-<!--                                    </li>-->
-
-
-<!--                                </ul>-->
-<!--                            </label>-->
-<!--                        </div>-->
-
-
-<!--                    </div>-->
-<!--                    &lt;!&ndash; &ndash;&gt;-->
-<!--                    &lt;!&ndash;-->
-<!--                    <form method="post" enctype="multipart/form-data" action="Upload.ashx">&ndash;&gt;-->
-<!--                    &lt;!&ndash; <input type="file" name="fileName"/>&ndash;&gt;-->
-<!--                    &lt;!&ndash; <input type="submit" name="上传"/>&ndash;&gt;-->
-<!--                    &lt;!&ndash;-->
-<!--                </form>-->
-<!--                &ndash;&gt;-->
-<!--                </div>-->
-
-<!--            </div>-->
-
-             <div role="tabpanel" class="tab-pane active" id="half-structure">
+        <div role="tabpanel" class="tab-pane active" id="half-structure">
                 <!-- 半结构化数据---------------------------------------------------------------------------->
                 <div class="container">
                     <input type="radio" onclick="half_equipment()" name="half" value=""><label>装备信息抽取</label>
@@ -246,11 +179,10 @@
 
                 </div>
 
-            </div>
             <div role="tabpanel" class="tab-pane" id="vector">
                 <!-- 表示学习数据---------------------------------------------------------------------------->
                 <div class="container">
-        <div id="progressbar5"></div>
+                    <div id="progressbar5"></div>
                 </div>
                 <div class="shadow panel panel-default parent-panel" style="padding:15px">
                     请求URL：<label>https://192.168.12.102:8888/cgi-bin/get_similar_target.py?name=</label>
@@ -258,6 +190,7 @@
                 </div>
                 <div id="show_vector" class="" style="">
                 </div>
+            </div>
             </div>
 
 <!--            <div role="tabpanel" class="tab-pane active" id="non-structure">-->
