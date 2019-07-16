@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^half_structure/syn/$', views.half_structure_syn),
     # url(r'^half_structure/post/$', views.half_structure_post),
     url(r'^non_structure/get/$', views.non_structure),
+    url(r'^baike/get/$', views.get_baike),
     url(r'^mix/get/$', views.get_mixed),
     url(r'^vector/get/$', views.show_vector),
     url(r'^temp/$', views.temp),

@@ -107,7 +107,7 @@
             </li>
             <li role="" onclick="get_non_structure_data();"><a href="#non-structure" aria-controls="profile" role="tab" data-toggle="tab">非结构化知识抽取</a>
             </li>
-            <li role=""><a href="#mix" aria-controls="" role="" data-toggle="tab">多源知识融合</a>
+            <li role="" onclick="show_mix();"><a href="#mix" aria-controls="" role="" data-toggle="tab">多源知识融合</a>
             </li>
             <li role=""><a href="#vector" aria-controls="profile" role="tab" data-toggle="tab">知识表示学习</a>
             </li>
@@ -115,6 +115,7 @@
 
         <!-- Tab panes -->
         <div class="tab-content">
+<!--            <input type="hidden" id="loaded">-->
         <div role="tabpanel" class="tab-pane active" id="half-structure">
                 <!-- 半结构化数据---------------------------------------------------------------------------->
                 <div class="container">
@@ -135,7 +136,7 @@
         <div id="progressbar2"></div>
                 </div>
                 <!-- 检索内容---------------------------------------------------------------------->
-                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                <div id="baike_content" class="shadow panel panel-default parent-panel" style="padding:15px">
                     百科知识抽取
                 </div>
             </div>
@@ -158,23 +159,17 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="mix">
-
                 <!-- 检索内容---------------------------------------------------------------------->
-
-                <div class="shadow panel panel-default parent-panel" style="padding:15px">
-
-        <div id="progressbar4"></div>
+                <div class="container">
+                        <div id="progressbar4"></div>
                 </div>
                 <!-- 知识融合数据---------------------------------------------------------------------------->
-                <div class="container">
-                    名称为<label>{{ets.name}}</label>实体属性冲突，需进行融合,融合属性为<label>{{ets.pro}}</label>
-                    请选择：<br>
-                    <form action="" method="get" accept-charset="UTF-8">
-                    {%for s in ets.selection%}
-                    <input type="radio" name="selections" value={{forloop.counter}}><lable>{{forloop.counter}}、{{s}}</lable><br>
-                    {% endfor %}
-                        <input type="button" onclick="upload_mix();" value="提交">
-                    </form>
+                <input type="hidden" id="mixs_dict">
+                <input type="hidden" id="mixs_index">
+                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                    <div id="mix_content">
+                    </div>
+                        <input id="mix_button" type="button" onclick="upload_mix();" value="提交">
                 </div>
 
                 </div>
