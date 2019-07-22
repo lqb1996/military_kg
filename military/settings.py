@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dwebsocket',
     'kg',
 ]
 
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'dwebsocket.middleware.WebSocketMiddleware'
 ]
 
 ROOT_URLCONF = 'military.urls'
@@ -81,7 +83,7 @@ DATABASES = {
 
 
 
-#如果需要mongodb handler session tracking（不明觉厉），注释掉原来�?
+#如果需要mongodb handler session tracking（不明觉厉），注释掉原来�?
 # SESSION_ENGINE = 'mongoengine.django.sessions'
 # SESSION_SERIALIZER = 'mongoengine.django.sessions.BSONSerializer'
 # #SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -135,16 +137,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 #使用session配置-缓存session
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'  # 引擎
-SESSION_CACHE_ALIAS = 'default'  # 使用的缓存别名（默认内存缓存，也可以是memcache），此处别名依赖缓存的设�?
+SESSION_CACHE_ALIAS = 'default'  # 使用的缓存别名（默认内存缓存，也可以是memcache），此处别名依赖缓存的设�?
 
 SESSION_COOKIE_NAME = "sessionid"  # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字符串
-SESSION_COOKIE_PATH = "/"  # Session的cookie保存的路�?
-SESSION_COOKIE_DOMAIN = None  # Session的cookie保存的域�?
+SESSION_COOKIE_PATH = "/"  # Session的cookie保存的路�?
+SESSION_COOKIE_DOMAIN = None  # Session的cookie保存的域�?
 SESSION_COOKIE_SECURE = False  # 是否Https传输cookie
 SESSION_COOKIE_HTTPONLY = True  # 是否Session的cookie只支持http传输
-SESSION_COOKIE_AGE = 1209600  # Session的cookie失效日期�?周）
+SESSION_COOKIE_AGE = 1209600  # Session的cookie失效日期�?周）
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # 是否关闭浏览器使得Session过期
 SESSION_SAVE_EVERY_REQUEST = False  # 是否每次请求都保存Session，默认修改之后才保存
+
+# WEBSOCKET_ACCEPT_ALL = True
 
 #CLIENT_URI ='mongodb://lina:111111@localhost:27017/sample'
 #CLIENT_URI ='mongodb://localhost:27137/sample'
@@ -170,7 +174,7 @@ SESSION_SAVE_EVERY_REQUEST = False  # 是否每次请求都保存Session，默�
 #
 #
 # else:
-#     #uri方式连接数据库需要将@替换�?0%
+#     #uri方式连接数据库需要将@替换�?0%
 #     DB_PASSWORD=DB_PASSWORD.replace('@','%40')
 #     CLIENT_URI ='mongodb://'+DB_USERNAME+':'+DB_PASSWORD+'@'+DB_HOST+':'+str(DB_PORT)+'/'+DB_NAME
 #

@@ -3,7 +3,7 @@ function get_non_structure_data(){
 var h1_label = "<h1>非结构化知识抽取</h1><br/>"
 var w = "200px"
 $('#progressbar3').LineProgressbar({
-        duration: 30000,
+        duration: 3000,
 		percentage: 100
 	});
     $.ajax({
@@ -36,8 +36,8 @@ $('#progressbar3').LineProgressbar({
 //知识表示学习
 function get_vector(){
 $('#progressbar5').LineProgressbar({
-        duration: 10,
-		percentage: 90
+        duration: 1500,
+		percentage: 100
 	});
 var name = $("#vector_name").val();
 $.ajax({
@@ -54,11 +54,17 @@ $.ajax({
                 obj=eval("("+data+")");
              }
 //             var h;
+               var t1 = window.setInterval(function(){
+             var e = $('#progressbar5').find(".percentCount").html();
+             if(e=="100%"){
            $("#show_vector").html("<label>"+obj.vector_content+"</label>");
            $("#show_vector").attr({
                 "class": "shadow panel panel-default parent-panel",
                 "style": "padding:15px"
                     });
+             window.clearInterval(t1);
+             }
+             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);
@@ -168,6 +174,36 @@ $.ajax({
         }
 });
 }
+//function half_equipment(){
+//var h1_label = "<h1>装备信息抽取</h1><br/>"
+//if ("WebSocket" in window) {
+//            alert("您的浏览器支持 WebSocket!");
+//            // 打开一个 web socket
+//            ws = new WebSocket("ws://"+window.location.host+"/kg/half_structure/equipment/");
+//
+//            ws.onopen = function () {
+//                // Web Socket 已连接上，使用 send() 方法发送数据
+//                ws.send("发送数据");
+//                alert("数据发送中...");
+//            };
+//
+//            ws.onmessage = function (evt) {
+//                var received_msg = evt.data;
+//                alert("数据已接收...");
+//                alert("数据:" + received_msg)
+//            };
+//
+//            ws.onclose = function () {
+//                // 关闭 websocket
+//                alert("连接已关闭...");
+//            };
+//        }
+//
+//        else {
+//            // 浏览器不支持 WebSocket
+//            alert("您的浏览器不支持 WebSocket!");
+//        }
+//}
 
 
 function get_baike(){

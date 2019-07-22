@@ -6,6 +6,7 @@ from pymongo import MongoClient
 from django.conf import settings
 # from django.views.decorators.csrf import csrf_exempt, csrf_protect  # Add this
 from bson.objectid import ObjectId
+from dwebsocket.decorators import accept_websocket,require_websocket
 import sys
 import json
 import requests
@@ -57,7 +58,11 @@ def index(request):
     return render(request, "kg/index.html", {"ets": ets})
 
 
+@accept_websocket
 def half_structure_equ(request):
+    if request.is_websocket():
+        print(1)
+        request.websocket.send('下载完成'.encode('utf-8'))
     e = equipment.get_equ()
     e = json.dumps({'equ': e}, ensure_ascii=False)
     return HttpResponse(e)
