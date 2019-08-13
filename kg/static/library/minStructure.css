@@ -1,0 +1,56 @@
+/**清理边距**/ 
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td { margin:0px; padding:0px; } 
+/**默认字体**/ 
+body,button,input,select,textarea { font:12px/1.5 宋体,arial,sans-serif; } 
+h1,h2,h3,h4,h5,h6 { font-size:100%; } 
+address,cite,dfn,em,var { font-style:normal; } 
+code,kbd,pre,samp { font-family:courier new,courier,monospace; } 
+small { font-size:12px; } 
+ul,ol,li { list-style:none; } 
+a { text-decoration:none; } 
+a:hvoer { text-decoration:underline; } 
+sup { vertical-align:text-top; } 
+sub { vertical-align:text-bottom; } 
+legend { color:#FFFFFF; } 
+fieldset,img { border:0px; } 
+button,input,select,textarea{ font-size:100%; } 
+table { border-collapse:collapse; border-spacing:0; } 
+/**重置**/ 
+.invisible { visibility:hidden; } 
+.noBg { background:none !important; } 
+.clear { display:block; height:0; overflow:hidden; clear:both; } 
+.clearfix:after { content:'\20'; display:block; height:0; clear:both; } 
+.clearfix { *zoom:1; } 
+.secondpart { border-top:1px solid #000000; }
+.bsearch{
+	width:158px;
+	height:38px;
+  	background-size: 100%;
+  	border: 0px solid #ddd;
+  	margin:1.5%;
+}
+.bsearch:focus{ 
+	outline:none; 
+}
+ .container {
+            width: 90%;
+            margin: 0 auto;
+            border: 1px solid #E3E3E3;
+        }
+        .table thead {
+            height: 50px;
+        }
+        .table tbody {
+            padding: 10px;
+        }
+        .table tr td{
+        	text-align: center;
+        	border-bottom:1px solid #E3E3E3;
+        }
+        
+        .table tr th {
+            padding: 20px;
+            text-align: center;
+            background: #F0F0F0;
+            border-bottom:1px solid #E3E3E3;
+        }

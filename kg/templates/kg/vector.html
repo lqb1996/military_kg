@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>军事知识抽取与表示学习</title>
+
+<script src="../../static/library/js/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
+<script src="../../static/library/js/bootstrap.min.js"></script>
+<script src="../../static/library/js/html2canvas.js"></script>
+<link rel="stylesheet" href="../../static/library/jquery.lineProgressbar.css">
+<script src="../../static/library/js/jquery.lineProgressbar.js" type="text/javascript"></script>
+<script src="../../static/library/show.js"></script>
+    <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/library/shadow.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/style.css"/>
+    <style>
+        .panel-heading {
+            /**/
+            /*{#            background-color: #f7f7f7;#}*/
+        }
+    </style>
+</head>
+<body>
+<div class="container col-md-10 col-md-offset-1 parent">
+<div class="detai-tabs">
+    <div class="container">
+                </div>
+                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                    请求URL：<label>https://192.168.12.102:8888/cgi-bin/get_similar_target.py?name=</label>
+                    <input id="vector_name" type="text" value="F-22"><input type="button" value="发送请求" onclick="get_vector()">
+                </div>
+                <div id="show_vector" class="" style="">
+                </div>
+            </div>
+            </div>
+        </div>
+</body>
+</html>

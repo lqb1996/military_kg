@@ -17,7 +17,7 @@ import configparser
 sys.path.append(r'F:\eclipse-workspace\kg_mil_process')
 from script import 非结构化知识抽取 as Non
 from script.半结构化环球军事网抽取 import equipment, extract_structure, syn_words
-from script.百科知识抽取 import parseFramework
+from script.百科知识抽取 import parseFramework_ex as parseFramework
 from script import 多源知识融合 as mul_res
 
 
@@ -36,33 +36,35 @@ newProgress = True
 
 # This skips csrf validation. Use csrf_protect to have validation
 def index(request):
-
-    ets = {}
-    # if triples_editable=='True':
-    #     ets.append('triples')
-    # if entities_editable=='True':
-    #     ets.append('entities')
-    # if ment2ent_editable=='True':
-    #     ets.append('ment2ent')
-    # if types_editable=='True':
-    #     ets.append('types')
-    # ets.append('triples')
-    # name = '歼-16'
-    # pro = '名称'
-    # selection = ['歼-16战机', '歼16战机']
-    #
-    # ets['name'] = name
-    # ets['pro'] = pro
-    # ets['selection'] = selection
-
-    return render(request, "kg/index.html", {"ets": ets})
+    return render(request, "kg/index.html")
 
 
-@accept_websocket
+def minStructure(request):
+    return render(request, "kg/minStructure.html")
+
+
+def expressLearn(request):
+    return render(request, "kg/expressLearn.html")
+
+
+def mixed(request):
+    ms = mul_res.django_return()
+    ms = [i for i in ms if i != None]
+    return render(request, "kg/mixed.html", {'ms': ms})
+
+
+def non_ner(request):
+    return render(request, "kg/non_ner.html")
+
+
+def vector(request):
+    return render(request, "kg/vector.html")
+
+
+# @accept_websocket
 def half_structure_equ(request):
-    if request.is_websocket():
-        print(1)
-        request.websocket.send('下载完成'.encode('utf-8'))
+    # if request.is_websocket():
+    #     request.websocket.send('下载完成'.encode('utf-8'))
     e = equipment.get_equ()
     e = json.dumps({'equ': e}, ensure_ascii=False)
     return HttpResponse(e)
@@ -83,15 +85,9 @@ def half_structure_syn(request):
     return HttpResponse(syn)
 
 
-def half_structure_post(request):
-    return 0
-
-
 def get_mixed(request):
     ms = mul_res.django_return()
-    print("-------------------------------------------------------")
     ms = [i for i in ms if i != None]
-    print(ms)
     ms = json.dumps({'ms': ms}, ensure_ascii=False)
     return HttpResponse(ms)
 
@@ -129,17 +125,16 @@ def show_vector(request):
 
 
 def get_baike(request):
-    bk = """拉森号导弹驱逐舰
-[]
-[('中文名', '拉森号导弹驱逐舰'), ('外文名', 'USS Lassen (DDG-82)'), ('主 尺 寸', '155x20x50'), ('舰  级', '阿里·伯克级'), ('排 水 量', '9200吨'), ('建 造 厂', '英戈尔斯造船厂'), ('服役时间', '2001年4月21日'), ('母 港', '日本横须贺基地')]
-[('DESC', '拉森号驱逐舰（英文：USS Lassen DDG-82 ）是美国海军的第32艘<a>阿利·伯克级驱逐舰</a>，于2001年开始服役。该舰是为纪念海军中校克莱德·埃弗里特·拉森（Clyde Everett Lassen）命名，拉森曾经在战争中救援2名被击落的飞行员，被授予国会荣誉勋章。|||2015年10月27日美军导弹驱逐舰“拉森号”进入中国南海南沙群岛有关岛礁（<a>渚碧礁</a>）邻近的12海里水域，制造南沙紧张形势，受到中国海军“兰州”号导弹驱逐舰和“台州”号巡逻舰依法予以跟踪、告诫、警告。')]
-[('发展沿革', '拉森号由美国英戈尔斯造船厂制造，这艘多功能导弹驱逐舰，集合了美国最新的<a>军事科技</a>，并安装了<a>洛克希德·马丁公司</a>研制的第7代“<a>宙斯盾</a>”武器系统。|||拉森号驱逐舰出身于大名鼎鼎的阿利·伯克级“宙斯盾”驱逐舰家族。阿利·伯克级驱逐舰号称是美国海军史上“最大、最强、建造数量最多”的多用途驱逐舰，由美国巴斯钢铁公司和英格尔造船公司于20世纪80年代开始建造。当时，苏联海军能够从水下、水面和空中发射十多种反舰导弹，对美国海军构成了严重威胁，同时当时美国海军孔茨级和亚当斯级驱逐舰日渐老化，而斯普鲁恩斯级驱逐舰又难以应对日益严峻的反舰导弹威胁，因此阿利·伯克级驱逐舰应运而生。该级舰除了能够独立执行作战任务之外，其主要使命是为海上机动编队护航，担负编队的防空、反潜和对海作战任务。|||阿利·伯克级驱逐舰首舰“阿利·伯克”号于1991年7月建成服役，已经发展了3种型号，前21艘为I型，其后7艘为II型，从第29艘舰开始都是IIA型。美国海军已建成服役62艘，另在建或计划采购14艘，同时还在研发阿利·伯克级III型驱逐舰。“拉森”号驱逐舰是第32艘阿利·伯克级驱逐舰，属于IIA型，舷号DDG 82，1998年8月24日开工建造，1999年10月16日下水，2001年4月21日服役。按照驱逐舰35年的服役年限，“拉森”号已经接近半百了。'), ('技术特点', '“拉森”号导弹驱逐舰的127毫米单管舰炮。<a>舰炮</a>是海军舰艇的主要攻击武器，反应迅速，如果和导弹配合起来，对付空中来犯的敌机，水面舰艇，以及掠海导弹和对海岸线进行火力支援都靠它。舰炮使用的制导炮弹有很多，脱壳穿甲弹，预制破片弹等，舰炮打击十分精确。使用新材料制成的舰炮，又加上了激光和计算机新技术，搜索，跟踪一气呵成，威力更是不可小视。|||“火神”密集阵防炮，其实是六管20毫米口径的自动旋转火炮系统，专门用来对付来袭的反舰导弹。“火神”上的警戒雷达，跟踪雷达联合起来，可以使近防炮在5000米内确定只有0.1平方米范围内的目标，十分精准。再加上电子计算机的神机妙算，可以知道对方炮弹的运动轨迹，并且自动调整方向进行防御反击。|||“火神”密集阵使用的弹药是<a>贫铀穿甲弹</a>，弹芯里贫铀的密度是钢的两倍多。密集阵系统控制起来非常方便，根本不需要炮手，只要一个遥控器就可以。他一分钟可以发射4500发穿甲弹，最远能射到2000米。|||“拉森”号导弹驱逐舰前后一共设置了96个发射单元，他们组合成的武器名称是导弹垂直发射系统。对付陆地上的目标，可以发射“<a>战斧式巡航导弹</a>”；防空方面，垂直导弹发射系统发射<a>“标准”Ⅱ型舰对空导弹</a>；反潜方面，可发射<a>“阿斯洛克”反潜导弹</a>。|||装备了第7代“宙斯盾”系统，该系统的核心是一部新式AN/SPY－1D（V）舰载雷达，具有从杂波中提取出目标信号的能力；舰上共有4部相控阵天线，雷达的作用距离和分辨率明显提高。“宙斯盾”系统能对巡航导弹和其他威胁作出快速反应，能够自动检测和跟踪上百个目标，包括空中、海面和海下威胁的多个目标；又具有反电子对抗措施，系统整体能力大幅度提高，因而被称为舰载综合武器系统的里程碑。拉森”号导弹驱逐舰上还配备了2座超速散射箔条发射器和鱼雷诱饵装置，用来迷惑敌人掩护自己。'), ('性能数据', '1 x 32槽导弹发射架|||1 x 64槽Mk41垂直导弹发射架|||96 x RIM-67 SM-2标准二型导弹|||BGM-109 <a>战斧巡航导弹</a>|||或 RUM-139 VL-Asroc反潜火箭|||2 x Mk 46 三连装鱼雷管|||1 x 5/62in 舰炮|||2 x 25 mm 机炮|||4 x 12.7 mm 机枪'), ('服役动态', '拉森号于1998年8月24日在<a>密西西比州</a><a>帕斯卡古拉</a>的英戈尔斯造船厂开始建造与安放<a>龙骨</a>，1999年10月16日下水，2001年4月21日在<a>佛罗里达州</a><a>坦帕</a>服役。|||“拉森”号驱逐舰的母港是日本横须贺海军基地。该基地是美国国土以外唯一一处具有航空母舰母港机能的港口，也是美国在远东最大、功能最全的海军基地，被誉为“是美国海外海军基地中，规模最大、条件最好的基地之一”，美国海军第七舰队的司令部就设立于此。该基地除了驻有“拉森”号驱逐舰之外，还驻有“华盛顿”号核动力航母、2艘提康德罗加级巡洋舰和其他6艘阿利·伯克级驱逐舰。|||2015年10月27日美军导弹驱逐舰“拉森号”进入中国南海南沙群岛有关岛礁（<a>渚碧礁</a>）邻近的12海里水域，制造南沙紧张形势，受到中国海军“兰州”号导弹驱逐舰和“台州”号巡逻舰依法予以跟踪、告诫、警告。')]
-[('TAG', '武器装备'), ('TAG', '军事')]</br>
-解析成功
-"""
-    bk = json.dumps({'bk': bk}, ensure_ascii=False)
-    return HttpResponse(bk)
+    if request.method == 'GET':
+        keyword = request.GET.get('keyword', default='F-22')
+        url = 'http://baike.baidu.com/item/%s' % keyword
+        baike_obj = parseFramework.PARSE_FRAMEWORK()
+        baike_content = baike_obj.get_page_from_url(url)
+        baike_resolution = baike_obj.extractor_framework(baike_obj.get_page(baike_content, 4))
 
+        baike_res = json.dumps({'baike_content': baike_content, 'baike_resolution': baike_resolution}, ensure_ascii=False)
+        return HttpResponse(baike_res)
+    return HttpResponse(0)
 
 def temp(request):
     return render(request, "kg/temp.html")

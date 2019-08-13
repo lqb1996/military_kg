@@ -2,10 +2,10 @@
 function get_non_structure_data(){
 var h1_label = "<h1>非结构化知识抽取</h1><br/>"
 var w = "200px"
-$('#progressbar3').LineProgressbar({
-        duration: 3000,
-		percentage: 100
-	});
+//$('#progressbar3').LineProgressbar({
+//        duration: 3000,
+//		percentage: 100
+//	});
     $.ajax({
         type:"GET",
         url:"/kg/non_structure/get/",
@@ -20,13 +20,13 @@ $('#progressbar3').LineProgressbar({
              }
              var h = obj.non_structure_content.replace(/{/g,"<label>")
              h = h.replace(/}/g,"</label>")
-             var t1 = window.setInterval(function(){
-             var e = $('#progressbar3').find(".percentCount").html();
-             if(e=="100%"){
-           $("#non_structure_content").html(h);
-             window.clearInterval(t1);
-             }
-             },1000);
+         $("#non_structure_content").html(h);
+//             var t1 = window.setInterval(function(){
+//             var e = $('#progressbar3').find(".percentCount").html();
+//             if(e=="100%"){
+//             window.clearInterval(t1);
+//             }
+//             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);
@@ -35,10 +35,6 @@ $('#progressbar3').LineProgressbar({
 }
 //知识表示学习
 function get_vector(){
-$('#progressbar5').LineProgressbar({
-        duration: 1500,
-		percentage: 100
-	});
 var name = $("#vector_name").val();
 $.ajax({
         type:"GET",
@@ -53,18 +49,11 @@ $.ajax({
              }else{
                 obj=eval("("+data+")");
              }
-//             var h;
-               var t1 = window.setInterval(function(){
-             var e = $('#progressbar5').find(".percentCount").html();
-             if(e=="100%"){
            $("#show_vector").html("<label>"+obj.vector_content+"</label>");
            $("#show_vector").attr({
                 "class": "shadow panel panel-default parent-panel",
                 "style": "padding:15px"
                     });
-             window.clearInterval(t1);
-             }
-             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);
@@ -75,44 +64,23 @@ $.ajax({
 
 
 function show_mix(){
-$("#mix_button").hide();
-var h1_label = "<h1>多源知识融合</h1><br/>"
-var w = "200px"
-$('#progressbar4').LineProgressbar({
-        duration: 30000,
-		percentage: 100
-	});
-$.ajax({
-        type:"GET",
-        url:"/kg/mix/get/",
-        dataType:"json",
-        success:function(data){
-             var obj;
-             //判断是否是json格式
-             if((typeof data=='object')&&data.constructor==Object){
+    $("#mix_button").hide();
+    var h1_label = "<h1>多源知识融合</h1><br/>"
+    var data = $("#mixs_dict").val();
+//    var w = "200px"
+    if((typeof data=='object')&&data.constructor==Object){
                  obj=data;
              }else{
                 obj=eval("(" + data + ")");
              }
-             $('#mixs_dict').val(JSON.stringify(obj));
-             $('#mixs_index').val(0);
-             var h = h1_label + "名称为<label>" + obj.ms[0].mysql_name + "</label>实体属性冲突，需进行融合,融合属性为<label>" + obj.ms[0].pro + "</label></br>请选择：</br>";
-             for(i in obj.ms[0].mysql_pro_dict){
-             h = h + "<input type='radio' name='selections' value=i><lable>"+ (Number(i)+1) + "、" + obj.ms[0].mysql_pro_dict[i]+"</lable></br>"
-             }
-             var t1 = window.setInterval(function(){
-             var e = $('#progressbar4').find(".percentCount").html();
-             if(e=="100%"){
-         $("#mix_content").html(h);
-             $("#mix_button").show();
-             window.clearInterval(t1);
-             }
-             },1000);
-        },
-        error:function(jqXHR){
-           alert("发生错误："+ jqXHR.status);
-        }
-});
+//    $('#mixs_dict').val(JSON.stringify(obj));
+    $('#mixs_index').val(0);
+    var h = h1_label + "名称为<label>" + obj[0].mysql_name + "</label>实体属性冲突，需进行融合,融合属性为<label>" + obj[0].pro + "</label></br>请选择：</br>";
+    for(i in obj[0].mysql_pro_dict){
+        h = h + "<input type='radio' name='selections' value=i><lable>"+ (Number(i)+1) + "、" + obj[0].mysql_pro_dict[i]+"</lable></br>"
+    }
+   $("#mix_content").html(h);
+    $("#mix_button").show();
 }
 
 
@@ -126,24 +94,26 @@ if((typeof data=='object')&&data.constructor==Object){
              }else{
                 obj=eval("(" + data + ")");
              }
-             if(index<obj.ms.length){
-var h = h1_label + "名称为<label>" + obj.ms[index].mysql_name + "</label>实体属性冲突，需进行融合,融合属性为<label>" + obj.ms[index].pro + "</label></br>请选择：</br>";
-             for(i in obj.ms[index].mysql_pro_dict){
-             h = h + "<input type='radio' name='selections' value=i><lable>"+ (Number(i)+1) + "、" + obj.ms[index].mysql_pro_dict[i]+"</lable></br>"
+             if(index<obj.length){
+var h = h1_label + "名称为<label>" + obj[index].mysql_name + "</label>实体属性冲突，需进行融合,融合属性为<label>" + obj[index].pro + "</label></br>请选择：</br>";
+             for(i in obj[index].mysql_pro_dict){
+             h = h + "<input type='radio' name='selections' value=i><lable>"+ (Number(i)+1) + "、" + obj[index].mysql_pro_dict[i]+"</lable></br>"
              }
              }else{
              var h = h1_label + "知识融合完毕！"
+             $("#mix_button").hide();
              }
+//             alert(h);
          $("#mix_content").html(h);
 }
 //半结构化知识融合
 function half_equipment(){
 var h1_label = "<h1>装备信息抽取</h1><br/>"
 var w = "200px"
-$('#progressbar1').LineProgressbar({
-        duration: 13000,
-		percentage: 100
-	});
+//$('#progressbar1').LineProgressbar({
+//        duration: 13000,
+//		percentage: 100
+//	});
 $.ajax({
         type:"GET",
         url:"/kg/half_structure/equipment",
@@ -161,78 +131,44 @@ $.ajax({
              h = h + "<tr><td width='"+w+"'>" + obj.equ[i].subject_name + "</td><td width='"+w+"'>" + obj.equ[i].relation + "</td><td width='"+w+"'>" + obj.equ[i].object_name + "</td></tr>"
              }
              h += "</table>"
-             var t1 = window.setInterval(function(){
-             var e = $('#progressbar1').find(".percentCount").html();
-             if(e=="100%"){
          $("#half_structure_content").html(h);
-             window.clearInterval(t1);
-             }
-             },1000);
+//             var t1 = window.setInterval(function(){
+//             var e = $('#progressbar1').find(".percentCount").html();
+//             if(e=="100%"){
+//             window.clearInterval(t1);
+//             }
+//             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);
         }
 });
 }
-//function half_equipment(){
-//var h1_label = "<h1>装备信息抽取</h1><br/>"
-//if ("WebSocket" in window) {
-//            alert("您的浏览器支持 WebSocket!");
-//            // 打开一个 web socket
-//            ws = new WebSocket("ws://"+window.location.host+"/kg/half_structure/equipment/");
-//
-//            ws.onopen = function () {
-//                // Web Socket 已连接上，使用 send() 方法发送数据
-//                ws.send("发送数据");
-//                alert("数据发送中...");
-//            };
-//
-//            ws.onmessage = function (evt) {
-//                var received_msg = evt.data;
-//                alert("数据已接收...");
-//                alert("数据:" + received_msg)
-//            };
-//
-//            ws.onclose = function () {
-//                // 关闭 websocket
-//                alert("连接已关闭...");
-//            };
-//        }
-//
-//        else {
-//            // 浏览器不支持 WebSocket
-//            alert("您的浏览器不支持 WebSocket!");
-//        }
-//}
 
 
 function get_baike(){
-var h1_label = "<h1>百科知识抽取</h1><br/>"
-var w = "200px"
-$('#progressbar2').LineProgressbar({
-        duration: 3000,
-		percentage: 100
-	});
+var u = $("#baike_url").val();
 $.ajax({
         type:"GET",
-        url:"/kg/baike/get/",
+        url:"/kg/baike/get/?keyword=" + u,
         dataType:"json",
         success:function(data){
-             var obj;
-             //判断是否是json格式
+                var obj;
              if((typeof data=='object')&&data.constructor==Object){
                  obj=data;
              }else{
                 obj=eval("("+data+")");
              }
-             h1_label += obj.bk
-             var t1 = window.setInterval(function(){
-             var e = $('#progressbar2').find(".percentCount").html();
-             if(e=="100%"){
-         $("#baike_content").html(h1_label);
-             window.clearInterval(t1);
-             }
-             },1000);
+            str = "<div class='panel panel-default'><div class='panel-heading' data-toggle='collapse' data-parent='#accordion' data-target='#collapseInformation-single' style='background-color: rgb(232, 232, 232)'><h1>百度百科搜索结果：</h1></div></div>";
+            str = str + "<div id='collapseInformation-single' class='panel-collapse collapse in'><div class='panel-body'><div class='single'>"
+            str = str + obj.baike_content + "</div></div></div>";
+            str = str + "<div class='panel panel-default'><div class='panel-heading' data-toggle='collapse' data-parent='#accordion' data-target='#collapseInformation-single' style='background-color: rgb(232, 232, 232)'><h1>抽取后：</h1></div></div>";
+            str = str + "<div id='collapseInformation-single' class='panel-collapse collapse in'><div class='panel-body'><div class='single'>"
+            for(var i in obj.baike_resolution){
+            str = str + "<label>" + i + "</label>" + ':' + obj.baike_resolution[i] + "</br>";
+            }
+            str = str + "</div></div></div>";
+            $('#baike_content').html(str);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);
@@ -261,13 +197,13 @@ $.ajax({
                 obj=eval("("+data+")");
              }
              h1_label += obj.ext
-             var t1 = window.setInterval(function(){
-             var e = $('#progressbar1').find(".percentCount").html();
-             if(e=="100%"){
          $("#half_structure_content").html(h1_label);
-             window.clearInterval(t1);
-             }
-             },1000);
+//             var t1 = window.setInterval(function(){
+//             var e = $('#progressbar1').find(".percentCount").html();
+//             if(e=="100%"){
+//             window.clearInterval(t1);
+//             }
+//             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);
@@ -302,18 +238,16 @@ $.ajax({
              h += ','
              }
              h = h + "<label>" + obj.syn[i].detail[j] + "</label>"
-
              }
              h += ']<br/>'
              }
-//             h += obj.syn;
-             var t1 = window.setInterval(function(){
-             var e = $('#progressbar1').find(".percentCount").html();
-             if(e=="100%"){
          $("#half_structure_content").html(h);
-             window.clearInterval(t1);
-             }
-             },1000);
+//             var t1 = window.setInterval(function(){
+//             var e = $('#progressbar1').find(".percentCount").html();
+//             if(e=="100%"){
+//             window.clearInterval(t1);
+//             }
+//             },1000);
         },
         error:function(jqXHR){
            alert("发生错误："+ jqXHR.status);

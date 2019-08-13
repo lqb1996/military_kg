@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>情报知识图谱-半结构化知识抽取</title>
+		<link rel="stylesheet" href="../../static/library/minStructure.css" />
+		<script type="text/javascript" src="../../static/library/jquery.min.js"></script>
+		<style type="text/css">
+        body{
+            margin:0;
+            padding: 0;
+            width:100% auto;
+            height:100% auto;
+        }
+    </style> 
+ <script>
+    $(function(){
+
+    });
+    
+    function setType(e){
+    	if(e == 'all'){
+    		$.ajax({
+                url: "/kg/half_structure/equipment/", //json文件位置
+                type: "GET", //请求方式为get
+                dataType: "json", //返回数据格式为json
+                success: function(data) { //请求成功完成后要执行的方法
+                    //each循环 使用$.each方法遍历返回的数据date
+                    $("#scroll_bar").html("<thead><tr id='bar_head'><th>subject_name</th><th>relation</th><th>object_name</th></tr></thead><tbody></tbody>");
+                    $.each(data.equ, function(i, item) {
+                    	//获取最后一行的data-id(标识行)
+                        var rowIndex = $("#scroll_bar tr:last").attr("data-row");
+                        if (rowIndex == "" || rowIndex == null) {
+                            rowIndex = parseInt(1);
+                        } else {
+                            rowIndex = parseInt(rowIndex) + 1;
+                        }
+
+                        var htmlList = '<tr data-row=' + rowIndex + '>';
+                        //标题
+                        htmlList += '<td style="text-align:center">' + item.subject_name + '</td>';
+                        htmlList += '<td style="text-align:center">' + item.relation + '</td>';
+                        htmlList += '<td style="text-align:center">' + item.object_name + '</td>';
+                        htmlList += '</tr>';
+
+                        //在行最后添加数据
+                        $("#scroll_bar tr:last").after(htmlList);
+
+                        htmlList = '';
+                        //初始化行
+                    })
+                }
+            });
+    	}
+    	if(e == 'target'){
+    		$.ajax({
+                url: "/kg/half_structure/extract/", //json文件位置
+                type: "GET", //请求方式为get
+                dataType: "json", //返回数据格式为json
+                success: function(data) { //请求成功完成后要执行的方法
+                    //each循环 使用$.each方法遍历返回的数据date
+                    var obj = data.ext
+                        //在行最后添加数据
+                        $("#scroll_bar").html(obj);
+                        }
+                  });
+    	}
+    	if(e == 'event'){
+    		$.ajax({
+        type:"GET",
+        url:"/kg/half_structure/syn",
+        dataType:"json",
+        success:function(data){
+             var obj;
+             //判断是否是json格式
+             if((typeof data=='object')&&data.constructor==Object){
+                 obj=data;
+             }else{
+                obj=eval("("+data+")");
+             }
+             var h = "";
+             for(i in obj.syn){
+             h = h + "<label>" + obj.syn[i].name + "</label>的同型号指代为[";
+             for(j in obj.syn[i].detail){
+             if(j!=0){
+             h += ','
+             }
+             h = h + "<label>" + obj.syn[i].detail[j] + "</label>"
+             }
+             h += ']<br/>'
+             }
+         $("#scroll_bar").html(h);
+        },
+        error:function(jqXHR){
+           alert("发生错误："+ jqXHR.status);
+        }
+});
+    	}
+    }
+
+</script>
+		
+	</head>
+	<body bgcolor="#FFFFFF">
+	  <div class="head">
+		    <div class="button_control">
+		    	<input type="button" class="bsearch" style="background-color:#0080C0;color: #FFFFFF;" onclick="setType('all')" value="装备信息抽取">
+		    	<input type="button" class="bsearch" style="background-color:#0080C0;color: #FFFFFF;"  onclick="setType('target')" value="环球军事网半结构化信息">
+		    	<input type="button" class="bsearch" style="background-color:#0080C0;color: #FFFFFF;"  onclick="setType('event')" value="同义词生成">
+		    </div>	
+	  </div>
+		 
+    <div class="secondpart" style="text-align:center;">
+        <table id="scroll_bar" class="table container">
+        	<thead>
+        		<tr id="bar_head">
+        			<th>subject_name</th>
+        			<th>relation</th>
+        			<th>object_name</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        	</tbody>
+        </table>
+    </div>
+</body>
+</html>
