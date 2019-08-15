@@ -44,7 +44,7 @@ def minStructure(request):
 
 
 def expressLearn(request):
-    return render(request, "kg/expressLearn.html")
+    return render(request, "kg/知识抽取结果.html")
 
 
 def mixed(request):
@@ -131,8 +131,30 @@ def get_baike(request):
         baike_obj = parseFramework.PARSE_FRAMEWORK()
         baike_content = baike_obj.get_page_from_url(url)
         baike_resolution = baike_obj.extractor_framework(baike_obj.get_page(baike_content, 4))
-
         baike_res = json.dumps({'baike_content': baike_content, 'baike_resolution': baike_resolution}, ensure_ascii=False)
+        return HttpResponse(baike_res)
+    return HttpResponse(0)
+
+
+def baike_extract(request):
+    if request.method == 'GET':
+        keyword = request.GET.get('keyword', default='F-22')
+        url = 'http://baike.baidu.com/item/%s' % keyword
+        baike_obj = parseFramework.PARSE_FRAMEWORK()
+        baike_content = baike_obj.get_page_from_url(url)
+        baike_resolution = baike_obj.extractor_framework(baike_obj.get_page(baike_content, 4))
+        baike_res = json.dumps({'baike_resolution': baike_resolution}, ensure_ascii=False)
+        return HttpResponse(baike_res)
+    return HttpResponse(0)
+
+
+def baike_page(request):
+    if request.method == 'GET':
+        keyword = request.GET.get('page', default='F-22')
+        url = 'http://baike.baidu.com/item/%s' % keyword
+        baike_obj = parseFramework.PARSE_FRAMEWORK()
+        baike_content = baike_obj.get_page_from_url(url)
+        baike_res = json.dumps({'baike_content': baike_content}, ensure_ascii=False)
         return HttpResponse(baike_res)
     return HttpResponse(0)
 

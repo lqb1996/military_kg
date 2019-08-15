@@ -1,0 +1,124 @@
+		.div01 {
+			width: auto;
+			height: 80px;
+			background-color: #F3F3F3;
+		}
+		
+		
+		.input01 {
+			border: solid 1px #0BABE7;
+			height: 40px;
+			width: 816px;
+			margin-top: 18px;
+			margin-left: 30px;
+		}
+		
+		
+		.input03 {
+			border: solid 1px #0BABE7;
+			text-align: center;
+			height: 40px;
+			width: 160px;
+			margin-top: 10px;
+			font-weight: bold;
+			color: #757575;
+			background-color: white;
+			font-family: STHeitiSC-Medium;
+		}
+		
+		.input04 {
+			border: solid 1px #0BABE7;
+			text-align: center;
+			height: 40px;
+			width: 160px;
+			margin-top: 10px;
+			background-color:#0BABE7;
+			font-weight: bold;
+			color: white;
+			font-family: STHeitiSC-Medium;
+		}
+		
+		.div03 {
+			width: 80%;
+			height:auto;
+			margin: auto;
+			background-color: #ffffff;
+			border: solid 1px #dcdcdc;
+		}
+		
+		.div04 {
+			width: 5px;
+			height: 23px;
+			background-color: #0babe7;
+			float: left;
+			margin-top: 13px;
+			margin-left: 40px;
+		}
+		
+		.div05 {
+			width: auto;
+			height: 23px;
+			font-family: STHeitiSC-Medium;
+			font-size: 24px;
+			font-weight: normal;
+			font-stretch: normal;
+			letter-spacing: 0px;
+			color: #1c1c1c;
+			margin-top: 8px;
+			margin-left: 50px;
+		}
+		
+		table{
+			width: 80%;
+			height: 70%;
+			font-family: STHeitiSC-Light;
+			font-size: 14px;
+			font-weight: normal;
+			font-stretch: normal;
+			line-height: 30px;
+			letter-spacing: 0px;
+			color: #484848;
+			margin-top: 30px;
+			margin-left: 10%;
+			margin-block-end: 30px;
+		}
+		tr{
+			height: 30px;
+		}
+		td{
+			text-align: center;
+			width: 50px;
+		}
+		table tr:nth-child(odd){background:#F4F4F4;}
+		hr{
+			/*width: 1354px;*/
+			height: 1px;
+			background-color: #0babe7;
+		}
+		
+		.input02{
+			border-radius: 4px;
+			width: 60px;
+			height: 35px;
+			margin-top: 10px;
+			/*background-color: #0BABE7;*/
+			text-align: center;
+			background-image: url(Demo/img/搜索按钮.jpg);
+		}
+		.div06{
+			float: left;
+		}
+		.hh1{
+			margin-left: 30px;
+			margin-top: -1px;
+			border: none      #0BABE7;
+			height: 1px;
+		}
+		
+		.div08{
+			width: 80%;
+			margin: auto;
+			height: 500px;
+			background-color: #ffffff;
+			border: solid 1px #dcdcdc;
+		}

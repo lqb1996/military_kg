@@ -165,7 +165,15 @@ $.ajax({
             str = str + "<div class='panel panel-default'><div class='panel-heading' data-toggle='collapse' data-parent='#accordion' data-target='#collapseInformation-single' style='background-color: rgb(232, 232, 232)'><h1>抽取后：</h1></div></div>";
             str = str + "<div id='collapseInformation-single' class='panel-collapse collapse in'><div class='panel-body'><div class='single'>"
             for(var i in obj.baike_resolution){
-            str = str + "<label>" + i + "</label>" + ':' + obj.baike_resolution[i] + "</br>";
+            str = str + "<h1>" + i + ':' + "</h1>" + "</br>";
+            if(i != "title_name"){
+            for(var j in obj.baike_resolution[i]){
+            str = str + "<label>" + obj.baike_resolution[i][j][0] +"</label>:";
+            str = str + obj.baike_resolution[i][j][1].replace(/\[.*?\]/g,'').replace(/\<.*?\>/g,'') + "</br>";
+            }
+            }else{
+            str = str + obj.baike_resolution[i] + "</br>";
+            }
             }
             str = str + "</div></div></div>";
             $('#baike_content').html(str);

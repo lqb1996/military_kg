@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>知识抽取结果</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="../../static/library/baike.css"/>
+<!--	<script src="../../static/library/show.js"></script>-->
+	<script type="text/javascript" src="../../static/library/jquery.min.js"></script>
+	<script src="../../static/library/baike.js"></script>
+
+	<body>
+<input type="hidden" id="hide_page">
+<input type="hidden" id="hide_res">
+		<div class="div01">
+				<div class="div06">
+					<input type="text" id="baike_url" class="input01" value="" placeholder="" />
+				</div>
+				<div class="div07">
+					<img src="../../static/library/搜索按钮.jpg" style="margin-top: 20px;height: 40px; wclassth: 50px;" onclick="get_baike();"/>
+				</div>
+		</div>
+		<div class="div02">
+			<input id="button_page" type="button" class="input04" value="百度百科搜索结果" onclick="show_page();" style="margin-left: 30px;"/>
+			<input id="button_res" type="button" class="input03" value="知识抽取结果" onclick="show_res();" style="margin-left: -5px;"/>
+			<br/>
+			<hr  width="93%"  class="hh1" />
+		</div>
+
+		<div class="div03" id="baike_content">
+			<div class="div04">
+			</div>
+			<div class="div05" id="title_name">
+				战斗机
+			</div>
+			<table cellpadding="0px"  cellspacing="0px" id="resolution_res">
+				<tr>
+					<td>苏-30/苏-33“侧卫”</td>
+					<td>装备</td>
+					<td>“耀星”导弹</td>
+				</tr>
+				<tr>
+					<td>苏-30/苏-33“侧卫”</td>
+					<td>装备</td>
+					<td>RS-12/白杨/SS-25</td>
+				</tr>
+				<tr>
+					<td>F-15“鹰”</td>
+					<td>装备</td>
+					<td>GAU19/A航空机舱</td>
+				</tr>
+				<tr>
+					<td>F-15“鹰”</td>
+					<td>装备</td>
+					<td>“耀星”导弹</td>
+				</tr>
+				<tr>
+					<td>F-15“鹰”</td>
+					<td>装备</td>
+					<td>AIM-7/麻雀/Sparrow</td>
+				</tr>
+				<tr>
+					<td>SH-60 “海鹰”</td>
+					<td>装备</td>
+					<td>AGM-114/海尔法/地狱火</td>
+				</tr>
+				<tr>
+					<td>AT-7/11/C-45和JRB/SNB</td>
+					<td>装备</td>
+					<td>100-1型</td>
+				</tr>
+
+			</table>
+
+		</div>
+
+	</body>
+
+</html>
