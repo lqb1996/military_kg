@@ -40,7 +40,11 @@ def index(request):
 
 
 def minStructure(request):
-    return render(request, "kg/minStructure.html")
+    return render(request, "kg/装备关系抽取.html")
+
+
+def mixed_syn(request):
+    return render(request, "kg/syn.html")
 
 
 def expressLearn(request):
@@ -79,7 +83,6 @@ def half_structure_ext(request):
 
 def half_structure_syn(request):
     syn = syn_words.gen_word()
-    # print(syn.syn_list)
     syn = syn.syn_list
     syn = json.dumps({'syn': syn}, ensure_ascii=False)
     return HttpResponse(syn)
@@ -102,7 +105,7 @@ def non_structure(request):
 def show_vector(request):
     if request.method == 'GET':
         name = request.GET.get('name', default='F-22')
-        url = "http://192.168.12.102:8888/cgi-bin/get_similar_target.py"
+        url = "http://192.168.12.102:8888/cgi-bin/get_similar_target_1.py"
         querystring = {"name": name}
         headers = {
             'Content-Type': "application/x-www-form-urlencoded",
@@ -150,7 +153,7 @@ def baike_extract(request):
 
 def baike_page(request):
     if request.method == 'GET':
-        keyword = request.GET.get('page', default='F-22')
+        keyword = request.GET.get('keyword', default='F-22')
         url = 'http://baike.baidu.com/item/%s' % keyword
         baike_obj = parseFramework.PARSE_FRAMEWORK()
         baike_content = baike_obj.get_page_from_url(url)

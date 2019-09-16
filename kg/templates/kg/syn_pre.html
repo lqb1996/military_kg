@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>半结构化数据</title>
+		<link rel="stylesheet" type="text/css" href="../../static/library/newcss.css" />
+		<script src="../../static/library/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function(){
+					$("#title_text").html("同义词生成");
+					$.ajax({
+							type: "get", //待载入页面的url地址
+							url: "http://192.168.12.102:8001/kg/half_structure/syn",
+							dataType: "json", //返回数据格式为json
+							success: function(data) {
+								//载入成功时的回调函数
+								var obj;
+								//判断是否是json格式
+								if((typeof data == 'object') && data.constructor == Object) {
+									obj = data;
+								} else {
+									obj = eval("(" + data + ")");
+								}
+								var h = "";
+								var tr_h = ""
+								for(i in obj.syn) {
+									tr_h = "";
+									for(j in obj.syn[i].detail) {
+										if(obj.syn[i].name != obj.syn[i].detail[j]){
+										if(j != 0) {
+											tr_h += ',';
+										}
+										tr_h = tr_h + obj.syn[i].detail[j];
+										}
+									}
+									if(tr_h != ""){
+									h += "<tr><td>" + obj.syn[i].name + "的同型号指代为[" + tr_h + "]</td></tr>";
+									}
+								}
+								$("#scroll_bar").html(h);
+							},
+							error: function(jqXHR) {
+								alert("发生错误：" + jqXHR.status);
+							}
+					});
+		});
+		</script>
+
+	</head>
+	<body>
+		<div class="all">
+<!--			<input type="button" class="input03" value="同义词生成" onclick="setType('event');" style="height: 40px;width: 160px;" id="ty"/>-->
+			<br />
+<!--			<hr width="90%" class="hh1" style="margin-left: 50px;" />-->
+			<div class="div03">
+				<div class="div04">
+				</div>
+				<div class="div05"  id="title_text">
+					同义词生成
+				</div>
+				</br>
+				<table id="scroll_bar" cellpadding="15px" cellspacing="0px">
+					<tbody>
+						<!--<tr>
+							<td>"运-20的同型号指代为[运-20]</td>
+						</tr>
+						
+						<tr>
+							<td>歼-31战斗机的同型号指代为[歼-31]</td>
+						</tr>-->
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>军事知识抽取与表示学习</title>
+
+<!--<script src="../../static/library/js/jquery-1.11.0.min.js"></script>-->
+<!--<link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>-->
+<!--<script src="../../static/library/js/bootstrap.min.js"></script>-->
+<!--<script src="../../static/library/js/html2canvas.js"></script>-->
+<!--<link rel="stylesheet" href="../../static/library/jquery.lineProgressbar.css">-->
+<!--<script src="../../static/library/js/jquery.lineProgressbar.js" type="text/javascript"></script>-->
+<link rel="stylesheet" type="text/css" href="../../static/library/baike.css"/>
+<link rel="stylesheet" type="text/css" href="../../static/library/newcss.css"/>
+<script src="../../static/library/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../static/library/show.js"></script>
+<!--    <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>-->
+<!--    <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>-->
+<!--    <link rel="stylesheet" type="text/css" href="../../static/library/shadow.css"/>-->
+<!--    <link rel="stylesheet" type="text/css" href="../../static/style.css"/>-->
+<script>
+function get_vector(){
+var name = $("#vector_name").val();
+$.ajax({
+        type:"GET",
+        url:"/kg/vector/get?name="+name,
+        dataType:"json",
+        success:function(data){
+                var str = data.vector_content.substring(0, data.vector_content.lastIndexOf(']')+1);
+                obj = eval('(' + str + ')');
+                vct = "";
+                for(i in obj[0].vector){
+                vct += obj[0].vector[i] + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                if((Number(i)+1)%5==0){
+                        vct+='</br>';
+                    }
+                }
+                $("#show_vector").html(vct);
+                var h = "<tbody><tr><td  style='text-align: center;width: 40%;'><h2>words</h2></td><td style='text-align: center;width: 60%;'><h2>similarity</h2></td></tr>";
+                for(i in obj){
+                if(i%2==1){
+                    h += "<tr><td style='text-align: center;'>" + obj[i] + "</td><td style='text-align: center;'>" + obj[++i] + "</td></tr>";
+                    }
+                }
+                h+="</tbody>"
+                    $("#scroll_bar").html(h);
+        },
+        error:function(jqXHR){
+           alert("发生错误："+ jqXHR.status);
+        }
+});
+}
+</script>
+</head>
+<body>
+<div class="container col-md-10 col-md-offset-1 parent">
+<div class="detai-tabs">
+    <div class="div03">
+			<div class="div04">
+			</div>
+        <div class="div05">知识表示学习</div></br>
+        <div class="div05">请求URL：https://192.168.12.102:8888/cgi-bin/get_similar_target.py?name=
+                    <input class="input01" style="margin-left:0px; width:180px; height:30px;" id="vector_name" type="text" value="F-22"><input class="submit01" style="margin-left: 0px;" type="button" value="发送请求" onclick="get_vector();">
+            </div></br>
+            <div  class="">
+                <div id="show_vector"></div>
+                    <table id="scroll_bar" cellpadding="15px" cellspacing="0px">
+                    </table>
+                </div>
+                </div>
+</div>
+            </div>
+            </div>
+        </div>
+</body>
+</html>

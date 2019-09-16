@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>军事知识抽取与表示学习</title>
+
+<script src="../../static/library/js/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
+<script src="../../static/library/js/bootstrap.min.js"></script>
+<script src="../../static/library/js/html2canvas.js"></script>
+<link rel="stylesheet" href="../../static/library/jquery.lineProgressbar.css">
+<script src="../../static/library/js/jquery.lineProgressbar.js" type="text/javascript"></script>
+<script src="../../static/library/show.js"></script>
+    <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/library/shadow.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/style.css"/>
+    <style>
+        .panel-heading {
+            /**/
+            /*{#            background-color: #f7f7f7;#}*/
+        }
+    </style>
+</head>
+<body>
+<div class="container col-md-10 col-md-offset-1 parent">
+<div class="detai-tabs">
+    <div role="tabpanel" class="tab-pane" id="non-structure">
+                <!-- 非结构化数据---------------------------------------------------------------------------->
+                <div class="container">
+                    <div class="input-group" style="margin: 20px auto  20px 0px">
+                            <textarea id='non_input' class="form-control input-lg" name="subject" placeholder="">
+                            </textarea>
+                        <span class="input-group-btn">
+           <input type="button" class="btn btn-default btn-lg btn-query" value="抽取" onclick="get_non_structure_data();">
+                </span>
+                        </div>
+                </div>
+                <div id="non_structure_content" class="shadow panel panel-default parent-panel" style="padding:15px">
+                    <h1>请输入非结构化抽取文本</h1>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+</body>
+</html>

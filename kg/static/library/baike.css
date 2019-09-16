@@ -118,7 +118,7 @@
 		.div08{
 			width: 80%;
 			margin: auto;
-			height: 500px;
+			height: auto;
 			background-color: #ffffff;
 			border: solid 1px #dcdcdc;
 		}

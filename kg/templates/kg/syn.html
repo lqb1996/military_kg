@@ -1,0 +1,143 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>半结构化数据</title>
+		<link rel="stylesheet" type="text/css" href="../../static/library/newcss.css" />
+		<link rel="stylesheet" type="text/css" href="../../static/library/page.css" />
+		<script src="../../static/library/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../static/library/page.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		var syn_data = "[";
+		var per_page = 10;
+		$(function init(){
+					$("#title_text").html("实体链指");
+					$.ajax({
+							type: "get", //待载入页面的url地址
+							url: "http://192.168.12.102:8001/kg/half_structure/syn",
+							dataType: "json", //返回数据格式为json
+							success: function(data) {
+								//载入成功时的回调函数
+								var obj;
+								//判断是否是json格式
+								if((typeof data == 'object') && data.constructor == Object) {
+									obj = data;
+								} else {
+									obj = eval("(" + data + ")");
+								}
+								var h = "<tr><td style='width: 20px;'><h2>序号</h2></td><td style='width: 450px;'><h2>实体</h2></td><td style='width: 450px;'><h2>同义实体</h2></td></tr>";
+								var tr_h = ""
+								var row_num = 1;
+								for(i in obj.syn) {
+									tr_h = "";
+									for(j in obj.syn[i].detail) {
+										if(obj.syn[i].name != obj.syn[i].detail[j]){
+										if(j != 0) {
+											tr_h += ',';
+										}
+											tr_h = tr_h + obj.syn[i].detail[j];
+										}
+									}
+									if(tr_h != ""){
+									syn_data += '{"name":"' + obj.syn[i].name+'", "detail":"['+tr_h+']"},';
+									if(row_num < per_page + 1){
+										h += "<tr><td>"+ row_num +"</td><td>" + obj.syn[i].name + "</td><td>[" + tr_h + "]</td></tr>";
+									}
+										row_num += 1;
+									}
+								}
+								syn_data += "]";
+								$("#first_num").text(1);
+								$("#last_num").text(per_page);
+								$("#total_num").text(row_num);
+								$("#scroll_bar").html(h);
+								$("#pre_button").hide();
+								getPagesTarget(1,110,10);
+							},
+							error: function(jqXHR) {
+								alert("发生错误：" + jqXHR.status);
+							}
+					});
+		});
+
+
+		function pre_page(){
+			obj = eval(syn_data);
+			idx = Number($("tbody").children().eq(1).children().eq(0).html());
+			var h = "<tr><td style='width: 20px;'><h2>序号</h2></td><td style='width: 450px;'><h2>实体</h2></td><td style='width: 450px;'><h2>同义实体</h2></td></tr>";
+			var i = idx;
+			for(idx = idx - per_page;(idx<i)&&(idx>0);idx++){
+				h += "<tr><td>"+ idx +"</td><td>" + obj[idx-1].name + "</td><td>" + obj[idx-1].detail + "</td></tr>";
+			}
+			if((i - per_page)<= 1){
+				$("#pre_button").attr("disabled", true);
+				$("#pre_button").hide();
+			}
+			$("#next_button").removeAttr("disabled");
+			$("#next_button").show();
+			$("#first_num").text(i-per_page);
+			$("#last_num").text(i-1);
+			$("#scroll_bar").html(h);
+		}
+
+
+		function next_page(){
+			obj = eval(syn_data);
+			idx = Number($("tbody").children().eq(1).children().eq(0).html());
+			var h = "<tr><td style='width: 20px;'><h2>序号</h2></td><td style='width: 450px;'><h2>实体</h2></td><td style='width: 450px;'><h2>同义实体</h2></td></tr>";
+			var i = idx + per_page;
+			for(idx = idx + per_page;(idx<i+per_page)&&(idx<obj.length);idx++){
+				h += "<tr><td>"+ idx +"</td><td>" + obj[idx-1].name + "</td><td>" + obj[idx-1].detail + "</td></tr>";
+			}
+			if(idx >= obj.length){
+				$("#next_button").attr("disabled", true);
+				$("#next_button").hide();
+			}
+			$("#pre_button").removeAttr("disabled");
+			$("#pre_button").show();
+			$("#first_num").text(i);
+			$("#last_num").text(idx-1);
+			$("#scroll_bar").html(h);
+		}
+		</script>
+
+	</head>
+	<body>
+		<div class="all">
+<!--			<input type="button" class="input03" value="同义词生成" onclick="setType('event');" style="height: 40px;width: 160px;" id="ty"/>-->
+			<br />
+<!--			<hr width="90%" class="hh1" style="margin-left: 50px;" />-->
+			<br class="div03">
+				<div class="div04">
+				</div>
+				<div class="div05"  id="title_text" >
+					实体链指
+				</div>
+				</br>
+				<table id="scroll_bar" cellpadding="10px" cellspacing="0px">
+					<tbody>
+						
+						<!--<tr>
+							<td>"运-20的同型号指代为[运-20]</td>
+						</tr>
+						
+						<tr>
+							<td>歼-31战斗机的同型号指代为[歼-31]</td>
+						</tr>-->
+
+					</tbody>
+				</table>
+			<div class="page_num" style="margin-left:135px;">本页显示<span id="first_num"></span>-<span id="last_num"></span> 总记录数：<span id="total_num"></span></div>
+			<div class="page_div" style="margin-right:135px;">
+<!--				<div class="page_normal" style="width:auto;" id="pre_button" onclick="pre_page();">上一页</div>-->
+<!--				<div class="page_normal" style="width:auto;" id="next_button" onclick="next_page();">下一页</div>-->
+			<input type="button" class="page_normal" style="width:auto;" id="pre_button" onclick="pre_page();" value="上一页">
+			<input type="button" class="page_normal" style="width:auto;" id="next_button" onclick="next_page();" value="下一页">
+			</div>
+			</div>
+<!--			<div id="footerul" class="pagination">-->
+
+<!--			</div>-->
+		</div>
+
+	</body>
+</html>

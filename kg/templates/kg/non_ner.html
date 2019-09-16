@@ -1,47 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>军事知识抽取与表示学习</title>
+<html>
 
-<script src="../../static/library/js/jquery-1.11.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
-<script src="../../static/library/js/bootstrap.min.js"></script>
-<script src="../../static/library/js/html2canvas.js"></script>
-<link rel="stylesheet" href="../../static/library/jquery.lineProgressbar.css">
-<script src="../../static/library/js/jquery.lineProgressbar.js" type="text/javascript"></script>
-<script src="../../static/library/show.js"></script>
-    <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>
-    <link rel="stylesheet" type="text/css" href="../../static/library/shadow.css"/>
-    <link rel="stylesheet" type="text/css" href="../../static/style.css"/>
-    <style>
-        .panel-heading {
-            /**/
-            /*{#            background-color: #f7f7f7;#}*/
-        }
-    </style>
-</head>
-<body>
-<div class="container col-md-10 col-md-offset-1 parent">
-<div class="detai-tabs">
-    <div role="tabpanel" class="tab-pane" id="non-structure">
-                <!-- 非结构化数据---------------------------------------------------------------------------->
-                <div class="container">
-                    <div class="input-group" style="margin: 20px auto  20px 0px">
-                            <textarea id='non_input' class="form-control input-lg" name="subject" placeholder="">
-                            </textarea>
-                        <span class="input-group-btn">
-           <input type="button" class="btn btn-default btn-lg btn-query" value="抽取" onclick="get_non_structure_data();">
-                </span>
-                        </div>
-                </div>
-                <div id="non_structure_content" class="shadow panel panel-default parent-panel" style="padding:15px">
-                    <h1>请输入非结构化抽取文本</h1>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>非结构化知识抽取</title>
+	</head>
+
+	<link rel="stylesheet" type="text/css" href="../../static/library/baike.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/library/newcss.css" />
+	<script src="../../static/library/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+
+		function get_non_structure_data() {
+			var text = $("#non_structure_text").val();
+			$.ajax({
+				url: "http://192.168.12.7:8001/extract/", //json文件位置
+				type: "POST", //请求方式为post
+				data: {
+					"text": text
+				},
+				dataType: "json", //返回数据格式为json
+				success: function(data) { //循环遍历出json数组中的每一个数据并显示在对应的td中
+					var str = "<tr><td><h2>subject</h2></td ><td><h2>predicate</h2></td><td><h2>object</h2></td></tr>";
+					var newdata = data.spo_list; //转换为js数组对象
+					for(i in newdata) {
+						str += "<tr>";
+						str += "<td>" + newdata[i].subject + "</td>";
+						str += "<td>" + newdata[i].predicate + "</td>";
+						str += "<td>" + newdata[i].object + "</td>";
+						str += "</tr>";
+					}
+					$("tbody").html(str);
+				}
+			});
+		}
+	</script>
+
+	<body style="background-color:'#fffefc'">
+		<div class="updiv">
+			<textarea id="non_structure_text" name="" id="" value="" class="big_text"></textarea>
+
+			<div class="div_inner">
+
+			</div>
+
+			<input type="button" onclick="get_non_structure_data();" class="select_select" value="抽取" />
+		</div>
+
+		<div class="result">
+			<br />
+			<font class="res">抽取结果</font>
+			<br />
+			<br />
+
+			<div class="div03">
+
+				<!--<div class="div04">
+
+				</div>
+				<div class="div05">
+					战斗机
+				</div>-->
+				<table cellpadding="10px" cellspacing="0px">
+					<tbody>
+						<!--<tr>
+							<td>"苏-30/苏-33“侧卫”</td>
+							<td>装备</td>
+							<td>“耀星”导弹</td>
+						</tr>
+						<tr>
+							<td>苏-30/苏-33“侧卫”</td>
+							<td>装备</td>
+							<td>RS-12/白杨/SS-25</td>
+						</tr>
+						<tr>
+							<td>F-15“鹰” </td>
+							<td>装备</td>
+							<td>GAU19/A航空机枪</td>
+						</tr>
+						<tr>
+							<td>F-15“鹰” </td>
+							<td>装备</td>
+							<td>“耀星”导弹</td>
+						</tr>
+						<tr>
+							<td>F-15“鹰” </td>
+							<td>装备</td>
+							<td>AIM-7/麻雀/Sparrow</td>
+						</tr>
+						<tr>
+							<td>SH-60“海鹰”</td>
+							<td>装备</td>
+							<td>AGM-114/海尔法/地狱火</td>
+						</tr>
+
+						<tr>
+							<td>"苏-30/苏-33“侧卫”</td>
+							<td>装备</td>
+							<td>“耀星”导弹</td>
+						</tr>
+						<tr>
+							<td>苏-30/苏-33“侧卫”</td>
+							<td>装备</td>
+							<td>RS-12/白杨/SS-25</td>
+						</tr>
+						<tr>
+							<td>F-15“鹰” </td>
+							<td>装备</td>
+							<td>GAU19/A航空机枪</td>
+						</tr>
+						<tr>
+							<td>F-15“鹰” </td>
+							<td>装备</td>
+							<td>“耀星”导弹</td>
+						</tr>
+						<tr>
+							<td>F-15“鹰” </td>
+							<td>装备</td>
+							<td>AIM-7/麻雀/Sparrow</td>
+						</tr>
+						<tr>
+							<td>SH-60“海鹰”</td>
+							<td>装备</td>
+							<td>AGM-114/海尔法/地狱火</td>
+						</tr>
+						<tr>
+							<td>"苏-30/苏-33“侧卫”</td>
+							<td>装备</td>
+							<td>“耀星”导弹</td>
+						</tr>
+						<tr>
+							<td>苏-30/苏-33“侧卫”</td>
+							<td>装备</td>
+							<td>RS-12/白杨/SS-25</td>
+						</tr>
+						<tr>
+							<td>F-15“鹰” </td>
+							<td>装备</td>
+							<td>GAU19/A航空机枪</td>
+						</tr>
+						<tr>
+							<td>F-15“鹰” </td>
+							<td>装备</td>
+							<td>“耀星”导弹</td>
+						</tr>-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多源知识融合</title>
+    <script src="../../static/library/js/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/library/bootstrap/css/bootstrap.min.css"/>
+    <script src="../../static/library/js/bootstrap.min.js"></script>
+    <script src="../../static/library/js/html2canvas.js"></script>
+    <link rel="stylesheet" href="../../static/library/jquery.lineProgressbar.css">
+    <script src="../../static/library/js/jquery.lineProgressbar.js" type="text/javascript"></script>
+    <script src="../../static/library/show.js"></script>
+    <script src="../../static/library/xhr.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../../static/library/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/library/shadow.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/style.css"/>
+    <style>
+        .panel-heading {
+            /**/
+            /*{#            background-color: #f7f7f7;#}*/
+        }
+    </style>
+    <script type="text/javascript">
+    $(function() {
+    show_mix();
+    });
+    </script>
+</head>
+<body>
+        <!-- Tab panes -->
+        <div class="tab-content">
+                <div class="container">
+                </div>
+                <input type="hidden" id="mixs_dict" value="{{ms}}">
+                <input type="hidden" id="mixs_index">
+                <div class="shadow panel panel-default parent-panel" style="padding:15px">
+                    <div id="mix_content">
+                    </div>
+                    <input id="mix_button" type="button" onclick="upload_mix();" value="提交">
+                </div>
+            </div>
+</body>
+</html>
